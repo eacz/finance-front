@@ -4,7 +4,7 @@ import { TransactionItem } from './TransactionItem'
 
 export const TransactionsList = () => {
   return (
-    <ul className='bg-white shadow overflow-hidden sm:rounded-md max-w-md mx-auto mt-16'>
+    <ul className='shadow overflow-hidden sm:rounded-md w-full md:col-start-2 md:col-end-4'>
       {transactions.map((transaction) => (
         <TransactionItem transaction={transaction} key={transaction.id} />
       ))}

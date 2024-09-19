@@ -17,7 +17,7 @@ const menuItems = [
 export const TopMenu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   return (
-    <div className=''>
+    <div className='shadow'>
       <nav className='relative px-4 py-4 flex justify-between items-center bg-white'>
         <Image
           width={40}
