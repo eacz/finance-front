@@ -6,9 +6,10 @@ import Link from 'next/link'
 
 interface Props {
   transaction: Transaction
+  showCurrency?: boolean
 }
 
-export const TransactionItem = ({ transaction }: Props) => {
+export const TransactionItem = ({ transaction, showCurrency }: Props) => {
   return (
     <li>
       <Link href={`/transactions/${transaction.id}`}>
@@ -24,7 +25,7 @@ export const TransactionItem = ({ transaction }: Props) => {
           </div>
           <div className='mt-4 flex items-center justify-between'>
             <p className='text-sm font-medium text-gray-500'>
-              {/*Status: <span className='text-green-600'>Active</span>*/}
+              {showCurrency && <span className='text-green-600'>{transaction.currency.code}</span>}
             </p>
             <span className='font-light text-gray-500 '>{hourFormat(transaction.createdAt)}</span>
           </div>
