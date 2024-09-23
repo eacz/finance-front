@@ -1,7 +1,7 @@
+import { Account } from '@/account'
 import { Transaction } from '@/transactions'
 
 export const transactions: Transaction[] = [
-  
   {
     id: 6,
     type: 'INCOME',
@@ -126,6 +126,57 @@ export const transactions: Transaction[] = [
       valueAgainstPrimary: 1,
       createdAt: new Date('2024-03-18T17:42:09.237Z'),
       updatedAt: new Date('2024-03-18T17:42:09.237Z'),
+    },
+  },
+]
+
+export const accounts: Account[] = [
+  {
+    id: 3,
+    primary: false,
+    funds: 3000,
+    createdAt: new Date('2024-03-18T22:45:01.854Z'),
+    updatedAt: new Date('2024-03-21T01:33:36.596Z'),
+    currency: {
+      id: 6,
+      code: 'USDT',
+      name: 'TetherUS',
+      primary: false,
+      valueAgainstPrimary: 1,
+      createdAt: new Date('2024-03-18T17:42:02.788Z'),
+      updatedAt: new Date('2024-03-18T17:42:02.788Z'),
+    },
+  },
+  {
+    id: 2,
+    primary: false,
+    funds: 100755,
+    createdAt: new Date('2024-03-18T17:42:24.800Z'),
+    updatedAt: new Date('2024-08-06T14:54:55.585Z'),
+    currency: {
+      id: 7,
+      code: 'USD',
+      name: 'Dolares',
+      primary: false,
+      valueAgainstPrimary: 1,
+      createdAt: new Date('2024-03-18T17:42:09.237Z'),
+      updatedAt: new Date('2024-03-18T17:42:09.237Z'),
+    },
+  },
+  {
+    id: 4,
+    primary: false,
+    funds: 110000,
+    createdAt: new Date('2024-05-10T18:28:48.395Z'),
+    updatedAt: new Date('2024-05-13T22:03:44.572Z'),
+    currency: {
+      id: 8,
+      code: 'ARS',
+      name: 'Pesos',
+      primary: false,
+      valueAgainstPrimary: 0.001,
+      createdAt: new Date('2024-05-10T18:28:10.949Z'),
+      updatedAt: new Date('2024-05-10T18:28:10.949Z'),
     },
   },
 ]

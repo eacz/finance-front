@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { Transaction } from '../interfaces/transaction'
-import { currencyFormat } from '@/utils'
-import { hourFormat } from '@/utils/hourFormat'
+import { currencyFormat, hourFormat } from '@/utils'
 import Link from 'next/link'
 
 interface Props {
