@@ -12,7 +12,7 @@ export const AccountItem = ({ account }: Props) => {
       <div className='p-6'>
         <h5 className='mb-1 text-xl font-medium leading-tight '>{account.currency.code} Account</h5>
         <h6 className='mb-2 text-base font-medium leading-tight text-surface/75 dark:text-neutral-300'>
-          Last update: {dayFormat(account.updatedAt)}
+          Last transaction: {dayFormat(account.updatedAt)}
         </h6>
         <p className='mb-4 text-base leading-normal'>Funds: {currencyFormat(account.funds)}</p>
         <Link

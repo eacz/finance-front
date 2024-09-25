@@ -1,8 +1,12 @@
-import { transactions } from '@/data/testdata'
 import React from 'react'
 import { TransactionItem } from './TransactionItem'
+import { Transaction } from '../interfaces/transaction'
 
-export const TransactionsList = () => {
+interface Props {
+  transactions: Transaction[]
+}
+
+export const TransactionsList = ({ transactions }: Props) => {
   return (
     <ul className='shadow overflow-hidden sm:rounded-md w-full md:col-start-2 md:col-end-4'>
       {transactions.map((transaction) => (

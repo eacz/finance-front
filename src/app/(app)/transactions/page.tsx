@@ -1,3 +1,4 @@
+import { transactions } from '@/data/testdata'
 import { TransactionFilter, TransactionsList } from '@/transactions'
 
 export default function NamePage() {
@@ -7,7 +8,7 @@ export default function NamePage() {
       <h1 className='hidden md:block font-bold text-lg md:col-start-3'>Transactions</h1>
       <TransactionFilter />
       <h2 className='md:hidden font-bold text-lg md:col-start-3'>Transactions</h2>
-      <TransactionsList />
+      <TransactionsList transactions={transactions} />
     </div>
   )
 }
