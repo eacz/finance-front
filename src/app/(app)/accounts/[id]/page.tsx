@@ -1,3 +1,5 @@
+import { UpdateAccountFunds } from '@/account'
+import { Modal } from '@/components'
 import { accounts, transactions } from '@/data/testdata'
 import { TransactionsList } from '@/transactions'
 import { dayFormat, currencyFormat } from '@/utils'
@@ -38,9 +40,8 @@ export default function AccountByIdPage({ params }: Props) {
           Account created: <span className='font-bold'>{dayFormat(account.createdAt)}</span>
         </h6>
 
-        <button className='mt-2 lg:inline-block py-2 px-6 bg-blue-500 text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
-          Update account funds
-        </button>
+        <UpdateAccountFunds />
+        
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
       <TransactionsList transactions={transactions} />
