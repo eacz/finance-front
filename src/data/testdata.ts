@@ -1,5 +1,5 @@
-import { Account } from '@/account'
-import { Transaction } from '@/transactions'
+import { Account } from '@/modules/account'
+import { Transaction } from '@/modules/transactions'
 
 export const transactions: Transaction[] = [
   {

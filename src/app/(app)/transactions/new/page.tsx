@@ -1,4 +1,4 @@
-import { NewTransactionForm } from '@/transactions'
+import { NewTransactionForm } from '@/modules/transactions'
 
 export default function NewTransactionPage() {
   return (

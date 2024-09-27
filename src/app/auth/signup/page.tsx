@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { AuthWrapper } from '@/auth/components'
+import { AuthWrapper } from '@/modules/auth/components'
 
 export default function SignupPage() {
   return (

@@ -1,5 +1,5 @@
 import { transactions } from '@/data/testdata'
-import { TransactionFilter, TransactionsList } from '@/transactions'
+import { TransactionFilter, TransactionsList } from '@/modules/transactions'
 
 export default function NamePage() {
   return (

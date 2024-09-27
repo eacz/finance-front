@@ -1,7 +1,7 @@
-import { UpdateAccountFunds } from '@/account'
+import { UpdateAccountFunds } from '@/modules/account'
 import { Modal } from '@/components'
 import { accounts, transactions } from '@/data/testdata'
-import { TransactionsList } from '@/transactions'
+import { TransactionsList } from '@/modules/transactions'
 import { dayFormat, currencyFormat } from '@/utils'
 import { notFound } from 'next/navigation'
 

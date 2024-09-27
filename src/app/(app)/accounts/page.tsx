@@ -1,4 +1,4 @@
-import { AccountList } from "@/account";
+import { AccountList } from "@/modules/account";
 
 export default function AccountPage() {
   return (
