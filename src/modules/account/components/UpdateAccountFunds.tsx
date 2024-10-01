@@ -13,9 +13,7 @@ export const UpdateAccountFunds = () => {
 
   return (
     <>
-      <button
-        onClick={() => setIsModalActive(true)}
-        className='mt-2 lg:inline-block py-2 px-6 text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
+      <button onClick={() => setIsModalActive(true)} className='btn-primary'>
         Update account funds
       </button>
 
@@ -57,14 +55,10 @@ export const UpdateAccountFunds = () => {
           </div>
 
           <div className='flex justify-end gap-2'>
-            <button
-              onClick={() => setIsModalActive(false)}
-              className='mt-2 lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-700 font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
+            <button onClick={() => setIsModalActive(false)} className='btn-info'>
               Cancel
             </button>
-            <button className='mt-2 lg:inline-block py-2 px-6  text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
-              Save
-            </button>
+            <button className='btn-primary'>Save</button>
           </div>
         </form>
       </Modal>

@@ -53,7 +53,7 @@ export const TopMenu = () => {
 
         <Link
           href='/transactions/new'
-          className=' lg:inline-block py-2 px-6 bg-blue-500 text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
+          className='btn-primary'>
           Create Transaction
         </Link>
       </nav>

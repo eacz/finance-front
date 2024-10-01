@@ -52,15 +52,9 @@ export const NewTransactionForm = () => {
       </div>
 
       <div className='flex justify-end gap-2'>
-        <button className='mt-2 lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-700 font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
-          Cancel
-        </button>
-        <button className='mt-2 lg:inline-block py-2 px-6  text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
-          Save
-        </button>
+        <button className='btn-info'>Cancel</button>
+        <button className='btn-primary'>Save</button>
       </div>
     </form>
   )
 }
-
-

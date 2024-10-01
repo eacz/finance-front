@@ -98,7 +98,7 @@ a {
     --popover-foreground: 240 10% 3.9%;
     --primary: #03fc56;
     --primary-foreground: 0 0% 98%;
-    --secondary: #124E78;
+    --secondary: #124e78;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
@@ -125,7 +125,7 @@ a {
     --popover-foreground: 0 0% 98%;
     --primary: #03fc56;
     --primary-foreground: 240 5.9% 10%;
-    --secondary: #124E78;
+    --secondary: #124e78;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
@@ -151,4 +151,12 @@ a {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.btn-primary {
+  @apply lg:inline-block py-2 px-6 text-sm text-white font-bold rounded-xl bg-secondary hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:translate-x-1 hover:scale-105;
+}
+
+.btn-info {
+  @apply lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-700 font-bold rounded-xl hover:shadow-inner focus:outline-none;
 }
