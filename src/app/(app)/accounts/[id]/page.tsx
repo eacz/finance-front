@@ -15,7 +15,7 @@ export default function AccountByIdPage({ params }: Props) {
     notFound()
   }
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3  justify-center  gap-2 my-2 mx-2 bg-white mt-5 p-4 rounded'>
+    <div className='container-main grid grid-cols-1 md:grid-cols-3  justify-center  gap-2'>
       <h2 className=' mb-2 font-bold text-lg'>Account Details</h2>
       <h2 className=' mb-2 hidden md:block font-bold text-lg md:col-start-2 md:col-end-4'>
         Account Transactions

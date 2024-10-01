@@ -17,9 +17,9 @@ const accounts = [
 
 export default function ProfilePage() {
   return (
-    <div className='flex flex-col justify-center  gap-2 my-2 mx-2 bg-white mt-5 p-4 rounded'>
+    <div className='container-main flex flex-col justify-center items-center gap-2 '>
       <h1 className='mb-1 text-xl font-medium leading-tight '>Profile Resume</h1>
-      <div className='flex flex-col max-w-[600px]'>
+      <div className='flex flex-col max-w-[600px] w-full'>
         <div className='flex flex-row justify-between mb-4'>
           <p className='text-lg font-bold'>Esteban Canteros</p>
           <p className='text-lg font-bold'>@eacz</p>
