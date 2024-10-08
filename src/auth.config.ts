@@ -1,13 +1,15 @@
 import type { NextAuthConfig } from 'next-auth'
 import NextAuth from 'next-auth'
-import credentials from 'next-auth/providers/credentials'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import { z } from 'zod'
-import bcrypt from 'bcryptjs'
+import { LoginResponse } from './interfaces'
+
+const AUTH_URL_API = `${process.env.BACKEND_URL}/auth`
 
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
-    newUser: '/auth/new-account',
+    newUser: '/auth/signup',
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -36,7 +38,8 @@ export const authConfig: NextAuthConfig = {
     },
   },
   providers: [
-    credentials({
+    CredentialsProvider({
+      name: 'Credentials',
       async authorize(credentials) {
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
@@ -49,18 +52,20 @@ export const authConfig: NextAuthConfig = {
         const { email, password } = parsedCredentials.data
 
         //validate user through db
-        const user = { password: '123456' }
+        const res = await fetch(`${AUTH_URL_API}/login`, {
+          body: JSON.stringify({ email, password }),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        const { token, user }: LoginResponse = await res.json()
 
         if (!user) return null
 
-        if (!bcrypt.compareSync(password, user.password)) {
-          return null
-        }
-
-        const { password: _, ...rest } = user
-        console.log(rest)
-
-        return rest
+        //TODO: fix this type issue
+        return { ...user, token } as any
       },
     }),
   ],
