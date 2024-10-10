@@ -12,6 +12,7 @@ declare module 'next-auth' {
       country: string
       createdAt: Date
       updatedAt: Date
+      token: string
     } & DefaultSession['user']
   }
 
@@ -25,5 +26,6 @@ declare module 'next-auth' {
     country: string
     createdAt: Date
     updatedAt: Date
+    token: string
   }
 }
