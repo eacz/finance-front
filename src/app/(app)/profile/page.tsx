@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import LogoutButton from './LogoutButton'
 
 const accounts = [
   {
@@ -30,7 +31,9 @@ export default function ProfilePage() {
           <p>
             {accounts.map((account, index) => (
               <span key={account.id}>
-                <Link href={`/accounts/${account.id}`} className='underline'>{account.name}</Link>
+                <Link href={`/accounts/${account.id}`} className='underline'>
+                  {account.name}
+                </Link>
                 {index !== accounts.length - 1 && ', '}
               </span>
             ))}
@@ -48,8 +51,8 @@ export default function ProfilePage() {
           <p>Total Funds: </p>
           <p>300.000</p>
         </div>
-        <div className='flex flex-row justify-between'>
-          <p></p>
+        <div className='flex flex-row justify-end mt-4'>
+          <LogoutButton />
         </div>
       </div>
     </div>
