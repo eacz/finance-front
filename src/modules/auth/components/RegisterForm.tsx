@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { countries } from '@/data/countries'
+import { login, signup } from '@/actions'
+import { useState } from 'react'
 
 interface FormInputs {
   username: string
@@ -16,9 +18,16 @@ interface FormInputs {
 
 export const RegisterForm = () => {
   const { register, handleSubmit } = useForm<FormInputs>()
+  const [error, setError] = useState('')
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
+    const { ok } = await signup(data)
+    if (!ok) {
+      setError("Couldn't login")
+      return
+    }
+    await login(data.email, data.password)
+    window.location.replace('/')
   }
 
   return (

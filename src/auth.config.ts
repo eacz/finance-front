@@ -2,7 +2,7 @@ import type { NextAuthConfig } from 'next-auth'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { z } from 'zod'
-import { LoginResponse } from './interfaces'
+import { AuthResponse } from './interfaces'
 
 const AUTH_URL_API = `${process.env.BACKEND_URL}/auth`
 
@@ -60,7 +60,7 @@ export const authConfig: NextAuthConfig = {
           },
         })
 
-        const { token, user }: LoginResponse = await res.json()
+        const { token, user }: AuthResponse = await res.json()
 
         if (!user) return null
 
