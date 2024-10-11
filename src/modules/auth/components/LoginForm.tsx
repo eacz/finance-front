@@ -33,7 +33,7 @@ export const LoginForm = () => {
         <input
           type='email'
           placeholder='Email'
-          className='mt-1 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input'
           {...register('email', { required: true, minLength: 8 })}
         />
         {errors.email && <p className='text-red-500 mt-2'>Invalid email</p>}
@@ -43,7 +43,7 @@ export const LoginForm = () => {
         <input
           type='password'
           placeholder='Password'
-          className='mt-1 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input'
           {...register('password', { required: true, minLength: 6 })}
         />
         {errors.password && <p className='text-red-500 mt-2'>Password should have at least 6 characters</p>}
@@ -76,7 +76,7 @@ export const LoginForm = () => {
           <label className='mr-2'>New here?</label>
           <Link
             href='/auth/signup'
-            className=' text-blue-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
+            className='blue-link'>
             Create an account
           </Link>
         </div>

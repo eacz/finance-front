@@ -161,11 +161,31 @@ a {
   @apply lg:inline-block py-2 px-6 text-sm text-white font-bold rounded-xl bg-red-500 hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:translate-x-1 hover:scale-105;
 }
 
-
 .btn-info {
   @apply lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-700 font-bold rounded-xl hover:shadow-inner focus:outline-none;
 }
 
 .container-main {
   @apply bg-white  rounded justify-center md:max-w-[1280px] m-auto p-4;
+}
+
+.input {
+  @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-secondary;
+}
+
+.select {
+  @apply py-3 px-4 pe-9 block w-full bg-gray-200 border-2 border-gray-200 rounded text-sm disabled:opacity-50 disabled:pointer-events-none;
+}
+
+
+.label {
+  @apply block text-gray-500 font-bold  
+}
+
+.textarea {
+  @apply bg-gray-200 h-full appearance-none border-2 border-gray-200 rounded w-full mb-2 p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-secondary
+}
+
+.blue-link {
+  @apply text-blue-500 transition duration-500 ease-in-out   hover:scale-105
 }

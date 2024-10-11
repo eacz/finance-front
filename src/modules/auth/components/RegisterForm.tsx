@@ -36,13 +36,13 @@ export const RegisterForm = () => {
         <input
           type='text'
           placeholder='FirstName'
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input mb-4'
           {...register('firstName', { required: true })}
         />
         <input
           type='text'
           placeholder='LastName'
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input mb-4'
           {...register('lastName', { required: true })}
         />
       </div>
@@ -50,13 +50,13 @@ export const RegisterForm = () => {
         <input
           type='text'
           placeholder='Username'
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input mb-4'
           {...register('username', { required: true, minLength: 4 })}
         />
         <input
           type='email'
           placeholder='Email'
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input mb-4'
           {...register('email', { required: true })}
         />
       </div>
@@ -65,12 +65,12 @@ export const RegisterForm = () => {
         <input
           type='password'
           placeholder='Password'
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='input mb-4'
           {...register('password', { required: true, minLength: 6 })}
         />
 
         <select
-          className='mt-7 p-2 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+          className='select mb-4'
           {...register('country', { required: true })}>
           <option value=''>[ Select ]</option>
           {countries.map((country) => (
@@ -105,7 +105,7 @@ export const RegisterForm = () => {
           <label className='mr-2'>Already have an account?</label>
           <Link
             href='/auth/login'
-            className=' text-blue-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105'>
+            className='blue-link'>
             Login
           </Link>
         </div>
