@@ -3,8 +3,7 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { AuthResponse } from './interfaces'
-
-const AUTH_URL_API = `${process.env.BACKEND_URL}/auth`
+import { transactionApi } from './lib/axios'
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -51,16 +50,9 @@ export const authConfig: NextAuthConfig = {
 
         const { email, password } = parsedCredentials.data
 
-        //validate user through db
-        const res = await fetch(`${AUTH_URL_API}/login`, {
-          body: JSON.stringify({ email, password }),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
+        const { data } = await transactionApi.post<AuthResponse>('/auth/login', { email, password })
 
-        const { token, user }: AuthResponse = await res.json()
+        const { token, user } = data
 
         if (!user) return null
 

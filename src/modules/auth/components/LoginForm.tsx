@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { login } from '@/actions'
+import { useState } from 'react'
 
 interface FormInputs {
   email: string
@@ -17,13 +18,17 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<FormInputs>({})
 
+  const [error, setError] = useState('')
+
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     const { email, password } = data
 
-    const { ok } = await login(email.toLowerCase(), password)
-    if(ok){
-      window.location.replace('/')
+    const { ok, message } = await login(email.toLowerCase(), password)
+    if(!ok){
+      setError(message)
+      return 
     }
+    window.location.replace('/')
   }
 
   return (
@@ -48,6 +53,9 @@ export const LoginForm = () => {
         />
         {errors.password && <p className='text-red-500 mt-2'>Password should have at least 6 characters</p>}
       </div>
+
+      <p className='text-red-500 font-bold mt-2'>{error}</p>
+
 
       <div className='mt-7'>
         <button type='submit' className='btn-primary w-full'>

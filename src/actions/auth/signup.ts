@@ -1,6 +1,7 @@
 'use server'
 
 import { AuthResponse } from '@/interfaces'
+import { transactionApi } from '@/lib/axios'
 
 const AUTH_URL_API = `${process.env.BACKEND_URL}/auth`
 
@@ -15,20 +16,14 @@ interface Payload {
 
 export const signup = async (payload: Payload) => {
   try {
-    const res = await fetch(`${AUTH_URL_API}/signup`, {
-      body: JSON.stringify(payload),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    const { token, user }: AuthResponse = await res.json()
-    return { ok: true, token, user }
-  } catch (error) {
-    console.log(error)
+    const { data } = await transactionApi.post<AuthResponse>(`${AUTH_URL_API}/signup`, payload)
+    const { token, user } = data
+    return { ok: true, token, user, message: 'Register successfully' }
+  } catch (error: any) {
+    console.log()
     return {
       ok: false,
-      message: "Couldn't register properly",
+      message: error?.response?.data?.message  || 'Unknown error, contact support',
     }
   }
 }

@@ -21,9 +21,12 @@ export const RegisterForm = () => {
   const [error, setError] = useState('')
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const { ok } = await signup(data)
+    setError('')
+
+    const { ok, message } = await signup(data)
+    
     if (!ok) {
-      setError("Couldn't login")
+      setError(message)
       return
     }
     await login(data.email, data.password)
@@ -69,9 +72,7 @@ export const RegisterForm = () => {
           {...register('password', { required: true, minLength: 6 })}
         />
 
-        <select
-          className='select mb-4'
-          {...register('country', { required: true })}>
+        <select className='select mb-4' {...register('country', { required: true })}>
           <option value=''>[ Select ]</option>
           {countries.map((country) => (
             <option key={country.id} value={country.id}>
@@ -80,6 +81,9 @@ export const RegisterForm = () => {
           ))}
         </select>
       </div>
+
+      <p className='text-red-500 font-bold mt-2'>{error}</p>
+
       <div className='mt-7'>
         <button className='btn-primary w-full'>Create account</button>
       </div>
@@ -103,9 +107,7 @@ export const RegisterForm = () => {
       <div className='mt-7'>
         <div className='flex justify-center items-center'>
           <label className='mr-2'>Already have an account?</label>
-          <Link
-            href='/auth/login'
-            className='blue-link'>
+          <Link href='/auth/login' className='blue-link'>
             Login
           </Link>
         </div>
