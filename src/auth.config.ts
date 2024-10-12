@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { AuthResponse } from './interfaces'
 import { transactionApi } from './lib/axios'
-
+const BACKEND_URL = process.env.BACKEND_URL
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
@@ -51,9 +51,7 @@ export const authConfig: NextAuthConfig = {
         const { email, password } = parsedCredentials.data
 
         const { data } = await transactionApi.post<AuthResponse>('/auth/login', { email, password })
-
         const { token, user } = data
-
         if (!user) return null
 
         //TODO: fix this type issue
