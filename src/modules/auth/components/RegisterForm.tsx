@@ -82,7 +82,7 @@ export const RegisterForm = () => {
         </select>
       </div>
 
-      <p className='text-red-500 font-bold mt-2'>{error}</p>
+      <p className='text-danger font-bold mt-2'>{error}</p>
 
       <div className='mt-7'>
         <button className='btn-primary w-full'>Create account</button>

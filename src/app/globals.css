@@ -189,3 +189,7 @@ a {
 .blue-link {
   @apply text-blue-500 transition duration-500 ease-in-out   hover:scale-105
 }
+
+.text-danger {
+  @apply text-red-500 font-bold
+}

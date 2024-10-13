@@ -41,7 +41,7 @@ export const LoginForm = () => {
           className='input'
           {...register('email', { required: true, minLength: 8 })}
         />
-        {errors.email && <p className='text-red-500 mt-2'>Invalid email</p>}
+        {errors.email && <p className='text-danger mt-2'>Invalid email</p>}
       </div>
 
       <div className='mt-7'>
@@ -51,10 +51,10 @@ export const LoginForm = () => {
           className='input'
           {...register('password', { required: true, minLength: 6 })}
         />
-        {errors.password && <p className='text-red-500 mt-2'>Password should have at least 6 characters</p>}
+        {errors.password && <p className='text-danger mt-2'>Password should have at least 6 characters</p>}
       </div>
 
-      <p className='text-red-500 font-bold mt-2'>{error}</p>
+      <p className='text-danger font-bold mt-2'>{error}</p>
 
 
       <div className='mt-7'>
