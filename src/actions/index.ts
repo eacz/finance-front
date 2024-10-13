@@ -3,3 +3,5 @@ export * from './auth/signup'
 export * from './auth/logout'
 
 export * from './user/get-profile-resume'
+
+export * from './account/get-accounts-by-user'

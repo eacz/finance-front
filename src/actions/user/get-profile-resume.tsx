@@ -2,8 +2,6 @@
 
 import { transactionApi } from '@/lib/axios'
 
-const BACKEND_URL = process.env.BACKEND_URL
-
 interface getProfileResumeResponse {
   user: {
     fullName: string

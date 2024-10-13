@@ -5,10 +5,8 @@ import { getProfileResume } from '@/actions'
 
 export default async function ProfilePage() {
   const session = await auth()
-  console.log(session);
   
   const { ok, data } = await getProfileResume(session?.user.token || '')
-  console.log({ok, data});
   
   if (!ok || !data) {
     return <p>Error loading profile resume</p>
