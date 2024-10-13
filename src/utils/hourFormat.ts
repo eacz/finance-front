@@ -1,8 +1,8 @@
-export const hourFormat = (date: Date) => {
+export const hourFormat = (date: Date | string) => {
+  const dateToFormat = new Date(date)
   return new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Asia/Seoul',
     hourCycle: 'h23',
     hour: '2-digit',
     minute: '2-digit',
-  }).format(date)
+  }).format(dateToFormat)
 }
