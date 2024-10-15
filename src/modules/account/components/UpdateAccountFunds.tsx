@@ -1,18 +1,34 @@
 'use client'
 
+import { updateAccountFunds } from '@/actions'
 import { Modal } from '@/components'
+import { currencyFormatNoSymbol } from '@/utils'
 import { FormEvent, useState } from 'react'
 
-export const UpdateAccountFunds = () => {
-  const [isModalActive, setIsModalActive] = useState(false)
+interface Props {
+  funds: number
+  accountId: number
+  token?: string
+}
 
-  const handleSubmit = (event: FormEvent) => {
+export const UpdateAccountFunds = ({ funds, accountId, token = '' }: Props) => {
+  const [isModalActive, setIsModalActive] = useState(false)
+  const [error, setError] = useState('')
+  const [newFunds, setNewFunds] = useState(0)
+
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    console.log('submiting form')
+    const { ok, message } = await updateAccountFunds(token, { amount: newFunds, accountId })
+    if (!ok) {
+      setError(message)
+    }
+    setError('')
+    setNewFunds(0)
+    setIsModalActive(false)
   }
 
   return (
-    <>
+    <div className='my-2'>
       <button onClick={() => setIsModalActive(true)} className='btn-primary'>
         Update account funds
       </button>
@@ -34,7 +50,7 @@ export const UpdateAccountFunds = () => {
                 id='inline-full-name'
                 disabled
                 type='number'
-                value='1000.00'
+                value={currencyFormatNoSymbol(funds)}
               />
             </div>
           </div>
@@ -50,9 +66,13 @@ export const UpdateAccountFunds = () => {
                 id='inline-password'
                 type='number'
                 placeholder='100.00'
+                value={newFunds}
+                onChange={(e) => setNewFunds(Number(e.target.value))}
               />
             </div>
           </div>
+
+          {error && <p className='text-danger text-center'>{error}</p>}
 
           <div className='flex justify-end gap-2'>
             <button onClick={() => setIsModalActive(false)} className='btn-info'>
@@ -62,6 +82,6 @@ export const UpdateAccountFunds = () => {
           </div>
         </form>
       </Modal>
-    </>
+    </div>
   )
 }

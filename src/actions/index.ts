@@ -6,3 +6,4 @@ export * from './user/get-profile-resume'
 
 export * from './account/get-accounts-by-user'
 export * from './account/get-account-by-id'
+export * from './account/update-account-funds'

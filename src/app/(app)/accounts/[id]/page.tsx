@@ -12,11 +12,11 @@ interface Props {
 export default async function AccountByIdPage({ params }: Props) {
   const session = await auth()
 
-  const { ok, account, message, transactions } = await getAccountById(session?.user.token ?? '', {
+  const { ok, account, transactions } = await getAccountById(session?.user.token ?? '', {
     accountId: Number(params.id),
   })
 
-  if (!account) {
+  if (!ok || !account) {
     notFound()
   }
 
@@ -46,7 +46,7 @@ export default async function AccountByIdPage({ params }: Props) {
           Account created: <span className='font-bold'>{dayFormat(account.createdAt)}</span>
         </h6>
 
-        <UpdateAccountFunds />
+        <UpdateAccountFunds funds={account.funds} token={session?.user.token} accountId={account.id} />
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
       <TransactionsList transactions={transactions} />
