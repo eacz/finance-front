@@ -5,3 +5,4 @@ export * from './auth/logout'
 export * from './user/get-profile-resume'
 
 export * from './account/get-accounts-by-user'
+export * from './account/get-account-by-id'

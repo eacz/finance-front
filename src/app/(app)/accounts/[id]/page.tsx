@@ -1,19 +1,25 @@
 import { UpdateAccountFunds } from '@/modules/account'
-import { Modal } from '@/components'
-import { accounts, transactions } from '@/data/testdata'
 import { TransactionsList } from '@/modules/transactions'
 import { dayFormat, currencyFormat } from '@/utils'
 import { notFound } from 'next/navigation'
+import { getAccountById } from '@/actions'
+import { auth } from '@/auth.config'
 
 interface Props {
   params: { id: string }
 }
 
-export default function AccountByIdPage({ params }: Props) {
-  const account = accounts.find((account) => account.id === Number(params.id))
+export default async function AccountByIdPage({ params }: Props) {
+  const session = await auth()
+
+  const { ok, account, message, transactions } = await getAccountById(session?.user.token ?? '', {
+    accountId: Number(params.id),
+  })
+
   if (!account) {
     notFound()
   }
+
   return (
     <div className='container-main grid grid-cols-1 md:grid-cols-3  justify-center  gap-2'>
       <h2 className=' mb-2 font-bold text-lg'>Account Details</h2>
@@ -41,7 +47,6 @@ export default function AccountByIdPage({ params }: Props) {
         </h6>
 
         <UpdateAccountFunds />
-        
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
       <TransactionsList transactions={transactions} />
