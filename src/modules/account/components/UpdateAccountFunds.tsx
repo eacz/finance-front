@@ -1,20 +1,24 @@
 'use client'
 
+import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { updateAccountFunds } from '@/actions'
 import { Modal } from '@/components'
-import { currencyFormatNoSymbol } from '@/utils'
-import { FormEvent, useState } from 'react'
 
 interface Props {
   funds: number
   accountId: number
   token?: string
+  currencyCode?: string
 }
 
-export const UpdateAccountFunds = ({ funds, accountId, token = '' }: Props) => {
+export const UpdateAccountFunds = ({ funds, accountId, token = '', currencyCode }: Props) => {
   const [isModalActive, setIsModalActive] = useState(false)
   const [error, setError] = useState('')
-  const [newFunds, setNewFunds] = useState(0)
+  const [newFunds, setNewFunds] = useState(funds)
+
+  const router = useRouter()
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -25,6 +29,7 @@ export const UpdateAccountFunds = ({ funds, accountId, token = '' }: Props) => {
     setError('')
     setNewFunds(0)
     setIsModalActive(false)
+    router.refresh()
   }
 
   return (
@@ -36,7 +41,7 @@ export const UpdateAccountFunds = ({ funds, accountId, token = '' }: Props) => {
       <Modal
         active={isModalActive}
         setActive={(value: boolean) => setIsModalActive(value)}
-        title='Update {USD} Acount Funds'>
+        title={`Update ${currencyCode} Acount Funds`}>
         <form className='w-full mt-5' onSubmit={handleSubmit}>
           <div className='md:flex md:items-center mb-6'>
             <div className='md:w-1/3'>
@@ -50,7 +55,7 @@ export const UpdateAccountFunds = ({ funds, accountId, token = '' }: Props) => {
                 id='inline-full-name'
                 disabled
                 type='number'
-                value={currencyFormatNoSymbol(funds)}
+                value={funds}
               />
             </div>
           </div>

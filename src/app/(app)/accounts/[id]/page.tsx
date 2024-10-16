@@ -1,7 +1,8 @@
+import { notFound } from 'next/navigation'
+
 import { UpdateAccountFunds } from '@/modules/account'
 import { TransactionsList } from '@/modules/transactions'
 import { dayFormat, currencyFormat } from '@/utils'
-import { notFound } from 'next/navigation'
 import { getAccountById } from '@/actions'
 import { auth } from '@/auth.config'
 
@@ -19,7 +20,6 @@ export default async function AccountByIdPage({ params }: Props) {
   if (!ok || !account) {
     notFound()
   }
-
   return (
     <div className='container-main grid grid-cols-1 md:grid-cols-3  justify-center  gap-2'>
       <h2 className=' mb-2 font-bold text-lg'>Account Details</h2>
@@ -46,7 +46,12 @@ export default async function AccountByIdPage({ params }: Props) {
           Account created: <span className='font-bold'>{dayFormat(account.createdAt)}</span>
         </h6>
 
-        <UpdateAccountFunds funds={account.funds} token={session?.user.token} accountId={account.id} />
+        <UpdateAccountFunds
+          funds={account.funds}
+          currencyCode={account.currency.code}
+          token={session?.user.token}
+          accountId={account.id}
+        />
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
       <TransactionsList transactions={transactions} />
