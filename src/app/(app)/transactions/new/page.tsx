@@ -15,7 +15,7 @@ export default async function NewTransactionPage() {
   return (
     <div className='container-main grid grid-cols-1 justify-center items-center gap-2'>
       <h1 className='font-bold text-xl'>Create a new transaction</h1>
-      <NewTransactionForm accounts={data}/>
+      <NewTransactionForm accounts={data} token={session?.user.token ?? ''} />
     </div>
   )
 }

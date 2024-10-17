@@ -1,6 +1,9 @@
 'use client'
 
+import { createTransaction } from '@/actions'
 import { Account } from '@/modules/account'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface FormInputs {
@@ -13,13 +16,24 @@ interface FormInputs {
 
 interface Props {
   accounts: Account[]
+  token: string
 }
 
-export const NewTransactionForm = ({ accounts }: Props) => {
+export const NewTransactionForm = ({ accounts, token }: Props) => {
   const { register, handleSubmit } = useForm<FormInputs>()
+  const [error, setError] = useState('')
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
+    setError('')
+
+    const { ok, message } = await createTransaction(token, data)
+
+    if (!ok) {
+      setError(message)
+      return
+    }
+    router.replace('/transactions')
   }
 
   return (
@@ -79,8 +93,12 @@ export const NewTransactionForm = ({ accounts }: Props) => {
         </div>
       </div>
 
+      {error && <p className='text-danger font-bold mt-2 text-end'>{error}</p>}
+
       <div className='flex justify-end gap-2'>
-        <button className='btn-info'>Cancel</button>
+        <button className='btn-info' onClick={() => router.back()}>
+          Cancel
+        </button>
         <button className='btn-primary' type='submit'>
           Save
         </button>
