@@ -15,6 +15,7 @@ export default async function AccountByIdPage({ params }: Props) {
 
   const { ok, account, transactions } = await getAccountById(session?.user.token ?? '', {
     accountId: Number(params.id),
+    limit: 5,
   })
 
   if (!ok || !account) {

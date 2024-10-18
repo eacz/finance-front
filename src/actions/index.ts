@@ -9,3 +9,5 @@ export * from './account/get-account-by-id'
 export * from './account/update-account-funds'
 
 export * from './transaction/create-transactions'
+export * from './transaction/get-transactions-by-account'
+

@@ -1,29 +1,33 @@
 'use server'
 
 import { transactionApi } from '@/lib/axios'
-import { getAccountsByUserResponse } from '@/modules/account/interfaces/get-accounts-by-user.response'
-import { Transaction } from '@/modules/transactions'
 
-interface Payload {
+import { IPagination } from '@/interfaces'
+import { getAccountsByUserResponse } from '@/modules/account/interfaces/get-accounts-by-user.response'
+
+import { getTransactionsByAccount } from '../transaction/get-transactions-by-account'
+
+interface Payload extends IPagination {
   accountId: number
-  limit?: number
-  offset?: number
 }
 
-export const getAccountById = async (token: string, { accountId, limit = 10, offset = 0 }: Payload) => {
+export const getAccountById = async (token: string, { accountId, limit, offset }: Payload) => {
   try {
-    transactionApi.defaults.headers['Authorization'] = `Bearer ${token}`
-    const accountPromise = transactionApi.get<getAccountsByUserResponse>(`/account/${accountId}`)
-    const transactionPromise = await transactionApi.get<Transaction[]>(
-      `/transaction/by-account/${accountId}?limit=${limit}&offset=${offset}`
-    )
+    const accountPromise = transactionApi.get<getAccountsByUserResponse>(`/account/${accountId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    const transactionPromise = getTransactionsByAccount(token, { accountId, limit, offset })
 
-    const [{ data: account }, { data: transactions }] = await Promise.all([
+    const [{ data: account }, { ok, transactions, message }] = await Promise.all([
       accountPromise,
       transactionPromise,
     ])
 
-    return { ok: true, account, transactions }
+    if (!transactions || !ok) {
+      return { ok: false, message }
+    }
+
+    return { ok: true, account, transactions: transactions || [] }
   } catch (error: any) {
     console.log(error)
     return {
