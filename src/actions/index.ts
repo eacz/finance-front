@@ -10,4 +10,6 @@ export * from './account/update-account-funds'
 
 export * from './transaction/create-transactions'
 export * from './transaction/get-transactions-by-account'
+export * from './transaction/get-transactions-by-user'
+
 
