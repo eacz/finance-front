@@ -18,16 +18,13 @@ export const getAccountById = async (token: string, { accountId, limit, offset }
     })
     const transactionPromise = getTransactionsByAccount(token, { accountId, limit, offset })
 
-    const [{ data: account }, { ok, transactions, message }] = await Promise.all([
-      accountPromise,
-      transactionPromise,
-    ])
+    const [{ data: account }, { ok, data, message }] = await Promise.all([accountPromise, transactionPromise])
 
-    if (!transactions || !ok) {
+    if (!data || !ok) {
       return { ok: false, message }
     }
 
-    return { ok: true, account, transactions: transactions || [] }
+    return { ok: true, account, transactions: data.transactions || [], totalTransactions: data.total }
   } catch (error: any) {
     console.log(error)
     return {

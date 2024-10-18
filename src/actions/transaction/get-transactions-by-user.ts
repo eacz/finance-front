@@ -2,13 +2,13 @@
 
 import { IPagination } from '@/interfaces'
 import { transactionApi } from '@/lib/axios'
-import { Transaction } from '@/modules/transactions'
+import { TransactionWithTotal } from '@/modules/transactions'
 
 interface Payload extends IPagination {}
 
 export const getTransactionsByUser = async (token: string, { limit = 10, offset = 0 }: Payload) => {
   try {
-    const { data } = await transactionApi.get<{ total: number; transactions: Transaction[] }>(
+    const { data } = await transactionApi.get<TransactionWithTotal>(
       `/transaction/by-user?limit=${limit}&offset=${offset}`,
       { headers: { Authorization: `Bearer ${token}` } }
     )

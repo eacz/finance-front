@@ -15,18 +15,17 @@ export default async function TransactionsPage({ searchParams }: Props) {
   const transactionsPerPage = 6
   const offset = (page - 1) * transactionsPerPage
   const session = await auth()
-  
+
   const { ok, data } = await getTransactionsByUser(session?.user.token ?? '', {
     limit: transactionsPerPage,
     offset,
   })
-  
+
   if (!ok || !data) {
     notFound()
   }
 
   const totalPages = Math.ceil(data.total / transactionsPerPage)
-  
 
   return (
     <div className='container-main grid grid-cols-1 md:grid-cols-3 gap-4'>
@@ -35,7 +34,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
       <TransactionFilter />
       <h2 className='md:hidden font-bold text-lg md:col-start-3'>Transactions</h2>
       <TransactionsList transactions={data.transactions} showCurrency />
-      <Pagination totalPages={totalPages} />
+      {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
   )
 }

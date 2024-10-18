@@ -5,3 +5,5 @@ export * from './components/NewTransactionForm'
 
 
 export * from './interfaces/transaction'
+export * from './interfaces/transaction-with-total.response'
+

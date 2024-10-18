@@ -5,22 +5,33 @@ import { TransactionsList } from '@/modules/transactions'
 import { dayFormat, currencyFormat } from '@/utils'
 import { getAccountById } from '@/actions'
 import { auth } from '@/auth.config'
+import { Pagination } from '@/components'
 
 interface Props {
   params: { id: string }
+  searchParams: {
+    page?: string
+  }
 }
 
-export default async function AccountByIdPage({ params }: Props) {
+export default async function AccountByIdPage({ params, searchParams }: Props) {
+  const page = searchParams.page ? parseInt(searchParams.page) : 1
+  const transactionsPerPage = 6
+  const offset = (page - 1) * transactionsPerPage
   const session = await auth()
 
-  const { ok, account, transactions } = await getAccountById(session?.user.token ?? '', {
+  const { ok, account, transactions, totalTransactions } = await getAccountById(session?.user.token ?? '', {
     accountId: Number(params.id),
-    limit: 5,
+    limit: transactionsPerPage,
+    offset,
   })
 
   if (!ok || !account) {
     notFound()
   }
+
+  const totalPages = Math.ceil(totalTransactions / transactionsPerPage)
+
   return (
     <div className='container-main grid grid-cols-1 md:grid-cols-3  justify-center  gap-2'>
       <h2 className=' mb-2 font-bold text-lg'>Account Details</h2>
@@ -56,6 +67,8 @@ export default async function AccountByIdPage({ params }: Props) {
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
       <TransactionsList transactions={transactions} />
+
+      {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
   )
 }
