@@ -177,19 +177,31 @@ a {
   @apply py-3 px-4 pe-9 block w-full bg-gray-200 border-2 border-gray-200 rounded text-sm disabled:opacity-50 disabled:pointer-events-none;
 }
 
-
 .label {
-  @apply block text-gray-500 font-bold  
+  @apply block text-gray-500 font-bold;
 }
 
 .textarea {
-  @apply bg-gray-200 h-full appearance-none border-2 border-gray-200 rounded w-full mb-2 p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-secondary
+  @apply bg-gray-200 h-full appearance-none border-2 border-gray-200 rounded w-full mb-2 p-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-secondary;
 }
 
 .blue-link {
-  @apply text-blue-500 transition duration-500 ease-in-out   hover:scale-105
+  @apply text-blue-500 transition duration-500 ease-in-out   hover:scale-105;
 }
 
 .text-danger {
-  @apply text-red-500 font-bold
+  @apply text-red-500 font-bold;
+}
+
+.chevron-button {
+  @apply relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none;
+}
+
+.pagination-button {
+  @apply relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none;
+}
+
+.pagination-button-active {
+  @apply bg-blue-600 shadow-md text-white hover:text-white hover:bg-blue-700
+
 }
