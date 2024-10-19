@@ -1,5 +1,6 @@
 import { GetTransactionById } from '@/actions'
 import { auth } from '@/auth.config'
+import { RevertTransactionAlert } from '@/modules/transactions'
 import { currencyFormat, dayFormat } from '@/utils'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -48,7 +49,7 @@ export default async function TransactionByIdPage({ params }: Props) {
       </div>
       <div className='flex mt-10 justify-between gap-4'>
         <button className='btn-primary'>Modify transaction</button>
-        <button className='btn-danger'>Revert transaction</button>
+        <RevertTransactionAlert transactionId={transaction.id} />
       </div>
     </div>
   )
