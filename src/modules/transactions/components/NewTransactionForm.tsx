@@ -17,10 +17,14 @@ interface FormInputs {
 interface Props {
   accounts: Account[]
   token: string
+  fromAccount?: string
 }
 
-export const NewTransactionForm = ({ accounts, token }: Props) => {
-  const { register, handleSubmit } = useForm<FormInputs>()
+export const NewTransactionForm = ({ accounts, token, fromAccount }: Props) => {
+  const account = accounts.find((a) => a.id === Number(fromAccount))
+  const { register, handleSubmit } = useForm<FormInputs>({
+    defaultValues: { account: account ? account.id : undefined },
+  })
   const [error, setError] = useState('')
   const router = useRouter()
 

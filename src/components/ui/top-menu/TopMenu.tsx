@@ -5,7 +5,7 @@ import Image from 'next/image'
 import clsx from 'clsx'
 
 import { MenuItem, ThreeDots } from '../../'
-import Link from 'next/link'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 const menuItems = [
   { href: '/', name: 'Home' },
@@ -16,6 +16,17 @@ const menuItems = [
 
 export const TopMenu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+  const params = useParams()
+
+  const goToNewTransactionPage = () => {
+    if (pathname.includes('accounts') && params?.id) {
+      return router.push(`/transactions/new?fromAccount=${params.id}`)
+    }
+    router.push(`/transactions/new`)
+  }
+
   return (
     <div className='shadow'>
       <nav className='relative px-4 py-4 flex justify-between items-center bg-white'>
@@ -51,11 +62,9 @@ export const TopMenu = () => {
           })}
         </ul>
 
-        <Link
-          href='/transactions/new'
-          className='btn-primary'>
+        <button className='btn-primary' onClick={() => goToNewTransactionPage()}>
           Create Transaction
-        </Link>
+        </button>
       </nav>
       {/* Mobile Menu */}
       <div
