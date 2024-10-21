@@ -165,6 +165,10 @@ a {
   @apply lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-700 font-bold rounded-xl hover:shadow-inner focus:outline-none;
 }
 
+.btn-disabled {
+  @apply lg:inline-block py-2 px-6 text-sm bg-slate-200 text-gray-300 font-bold rounded-xl hover:shadow-inner focus:outline-none;
+}
+
 .container-main {
   @apply bg-white  rounded justify-center md:max-w-[1280px] m-auto p-4;
 }

@@ -1,21 +1,18 @@
 'use server'
 
 import { transactionApi } from '@/lib/axios'
+import { Transaction } from '@/modules/transactions'
 
-interface Payload {
-  id: number
-  title?: string
-  description?: string
-}
-
-export const modifyTransaction = async (token: string, { id, ...toUpdate }: Payload) => {
+export const revertTransaction = async (token: string, id: number) => {
   try {
-    const {
-      data: { ok },
-    } = await transactionApi.patch<{ ok: boolean }>(`/transaction/${id}`, toUpdate, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    return { ok, message: ok ? '' : 'Error updating the transaction' }
+    const { data } = await transactionApi.patch<Transaction>(
+      `/transaction/revert/${id}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    return { ok: true, data }
   } catch (error: any) {
     console.log(error.response.data)
     return {
