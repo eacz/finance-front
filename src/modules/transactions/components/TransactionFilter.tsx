@@ -24,6 +24,8 @@ export const TransactionFilter = ({ accounts }: Props) => {
     const params = new URLSearchParams(searchParams)
 
     Object.keys(data).forEach((field) => {
+      //page params is deleted because I don't know the amount of pages with the new filter
+      params.delete('page')
       if (data[field]) {
         params.set(field, data[field])
       }

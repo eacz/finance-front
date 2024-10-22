@@ -14,10 +14,15 @@ export const getTransactionsByUser = async (
   { limit = 10, offset = 0, account, textFilter }: Payload
 ) => {
   try {
-    console.log({ account, textFilter })
+    const params = new URLSearchParams()
+
+    params.set('limit', limit.toString())
+    params.set('offset', offset.toString())
+    if (account) params.set('account', account.toString())
+    if (textFilter) params.set('textFilter', textFilter.toString())
 
     const { data } = await transactionApi.get<TransactionWithTotal>(
-      `/transaction/by-user?limit=${limit}&offset=${offset}`,
+      `/transaction/by-user?${params.toString()}`,
       { headers: { Authorization: `Bearer ${token}` } }
     )
     return { ok: true, data }
