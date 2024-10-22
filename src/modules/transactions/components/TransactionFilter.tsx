@@ -1,7 +1,9 @@
 'use client'
 
-import { getAccountsByUserResponse } from '@/modules/account/interfaces/get-accounts-by-user.response'
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { getAccountsByUserResponse } from '@/modules/account/interfaces/get-accounts-by-user.response'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 interface FormInputs {
   textFilter: string
@@ -11,11 +13,27 @@ interface FormInputs {
 interface Props {
   accounts: getAccountsByUserResponse[] | undefined
 }
+
 export const TransactionFilter = ({ accounts }: Props) => {
   const { register, handleSubmit, reset } = useForm<FormInputs>()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<FormInputs> = async (data: any) => {
+    const params = new URLSearchParams(searchParams)
+
+    Object.keys(data).forEach((field) => {
+      if (data[field]) {
+        params.set(field, data[field])
+      }
+    })
+    router.push(`${pathname}?${params.toString()}`)
+  }
+
+  const onClear = () => {
+    reset()
+    router.push(pathname)
   }
 
   return (
@@ -29,7 +47,7 @@ export const TransactionFilter = ({ accounts }: Props) => {
           />
           <button className='bg-secondary text-white px-4 font-semibold py-2 rounded-r-md '>Go</button>
         </div>
-        <button className='btn-info' type='button' onClick={() => reset()}>
+        <button className='btn-info' type='button' onClick={() => onClear()}>
           Clear
         </button>
       </div>

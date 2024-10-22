@@ -4,10 +4,18 @@ import { IPagination } from '@/interfaces'
 import { transactionApi } from '@/lib/axios'
 import { TransactionWithTotal } from '@/modules/transactions'
 
-interface Payload extends IPagination {}
+interface Payload extends IPagination {
+  textFilter?: string
+  account?: string
+}
 
-export const getTransactionsByUser = async (token: string, { limit = 10, offset = 0 }: Payload) => {
+export const getTransactionsByUser = async (
+  token: string,
+  { limit = 10, offset = 0, account, textFilter }: Payload
+) => {
   try {
+    console.log({ account, textFilter })
+
     const { data } = await transactionApi.get<TransactionWithTotal>(
       `/transaction/by-user?limit=${limit}&offset=${offset}`,
       { headers: { Authorization: `Bearer ${token}` } }
