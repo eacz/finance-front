@@ -28,6 +28,8 @@ export const TransactionFilter = ({ accounts }: Props) => {
       params.delete('page')
       if (data[field]) {
         params.set(field, data[field])
+      } else {
+        params.delete(field)
       }
     })
     router.push(`${pathname}?${params.toString()}`)
