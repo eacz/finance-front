@@ -14,3 +14,5 @@ export * from './transaction/get-transactions-by-user'
 export * from './transaction/get-transaction-by-id'
 export * from './transaction/modify-transaction'
 export * from './transaction/revert-transaction'
+
+export * from './category/getCategoriesByUser'

@@ -1,4 +1,4 @@
-import { getAccountsByUser, getTransactionsByUser } from '@/actions'
+import { getAccountsByUser, getCategoriesByUser, getTransactionsByUser } from '@/actions'
 import { auth } from '@/auth.config'
 import { Pagination } from '@/components'
 import { TransactionFilter, TransactionsList } from '@/modules/transactions'
@@ -17,15 +17,18 @@ export default async function TransactionsPage({ searchParams }: Props) {
   const transactionsPerPage = 6
   const offset = (page - 1) * transactionsPerPage
   const session = await auth()
+  const token = session?.user.token ?? ''
 
-  const { ok, data } = await getTransactionsByUser(session?.user.token ?? '', {
+  const { ok, data } = await getTransactionsByUser(token, {
     limit: transactionsPerPage,
     offset,
     account: searchParams.account,
     textFilter: searchParams.textFilter,
   })
-  const { data: accounts } = await getAccountsByUser(session?.user.token || '')
+  const { data: accounts } = await getAccountsByUser(token)
 
+  const { data: categories } = await getCategoriesByUser(token)
+  
   if (!ok || !data) {
     notFound()
   }
