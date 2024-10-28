@@ -9,10 +9,15 @@ interface Payload {
   amount: number
   type: 'INCOME' | 'OUTCOME'
   account: number
+  categoryId?: number
 }
 
 export const createTransaction = async (token: string, payload: Payload) => {
   try {
+    if (payload.categoryId === 0) {
+      delete payload.categoryId
+    }
+
     const { data } = await transactionApi.post<CreateTransactionResponse>('/transaction', payload, {
       headers: { Authorization: `Bearer ${token}` },
     })

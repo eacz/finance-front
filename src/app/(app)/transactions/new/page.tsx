@@ -25,6 +25,7 @@ export default async function NewTransactionPage({ searchParams }: Props) {
       <NewTransactionForm
         accounts={accounts}
         token={session?.user.token ?? ''}
+        categories={categories ?? []}
         fromAccount={searchParams.fromAccount}
       />
     </div>

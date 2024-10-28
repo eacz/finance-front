@@ -1,10 +1,14 @@
 'use client'
 
-import { createTransaction } from '@/actions'
-import { Account } from '@/modules/account'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { createTransaction } from '@/actions'
+
+import { Account } from '@/modules/account'
+import { Category } from '@/modules/category'
+
 
 interface FormInputs {
   title: string
@@ -12,15 +16,17 @@ interface FormInputs {
   amount: number
   type: 'INCOME' | 'OUTCOME'
   account: number
+  categoryId?: number
 }
 
 interface Props {
   accounts: Account[]
+  categories: Category[]
   token: string
   fromAccount?: string
 }
 
-export const NewTransactionForm = ({ accounts, token, fromAccount }: Props) => {
+export const NewTransactionForm = ({ accounts, token, fromAccount, categories }: Props) => {
   const account = accounts.find((a) => a.id === Number(fromAccount))
   const { register, handleSubmit } = useForm<FormInputs>({
     defaultValues: { account: account ? account.id : undefined },
@@ -96,6 +102,25 @@ export const NewTransactionForm = ({ accounts, token, fromAccount }: Props) => {
           </select>
         </div>
       </div>
+
+      {categories && (
+        <div className='flex gap-2'>
+          <div className='flex-1'>
+            <label className='label' htmlFor=''>
+              Category
+            </label>
+            <select className='select' {...register('categoryId', { valueAsNumber: true })}>
+              <option value='0'>---</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div  className='flex-1' />
+        </div>
+      )}
 
       {error && <p className='text-danger font-bold mt-2 text-end'>{error}</p>}
 
