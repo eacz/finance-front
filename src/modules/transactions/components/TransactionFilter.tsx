@@ -4,17 +4,20 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { getAccountsByUserResponse } from '@/modules/account/interfaces/get-accounts-by-user.response'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Category } from '@/modules/category'
 
 interface FormInputs {
   textFilter: string
   account: number
+  category?: number
 }
 
 interface Props {
   accounts: getAccountsByUserResponse[] | undefined
+  categories: Category[]
 }
 
-export const TransactionFilter = ({ accounts }: Props) => {
+export const TransactionFilter = ({ accounts, categories }: Props) => {
   const { register, handleSubmit, reset } = useForm<FormInputs>()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -69,14 +72,19 @@ export const TransactionFilter = ({ accounts }: Props) => {
             </select>
           </div>
         )}
-        <div className='flex flex-col w-full'>
-          <label htmlFor=''>Category</label>
-          <select disabled className='select'>
-            <option>All </option>
-            <option>Clothes</option>
-            <option>Food</option>
-          </select>
-        </div>
+        {categories && (
+          <div className='flex flex-col w-full'>
+            <label htmlFor=''>Category</label>
+            <select className='select' {...register('category', { valueAsNumber: true })}>
+              <option value='0'>All</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
     </form>
   )

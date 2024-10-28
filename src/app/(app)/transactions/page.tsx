@@ -9,6 +9,7 @@ interface Props {
     page?: string
     textFilter?: string
     account?: string
+    category?: string
   }
 }
 
@@ -24,6 +25,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
     offset,
     account: searchParams.account,
     textFilter: searchParams.textFilter,
+    category: searchParams.category
   })
   const { data: accounts } = await getAccountsByUser(token)
 
@@ -39,7 +41,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
     <div className='container-main grid grid-cols-1 md:grid-cols-3 gap-4'>
       <h2 className='font-bold text-lg'>Filter</h2>
       <h1 className='hidden md:block font-bold text-lg md:col-start-3'>Transactions</h1>
-      <TransactionFilter accounts={accounts} />
+      <TransactionFilter accounts={accounts} categories={categories??[]} />
       <h2 className='md:hidden font-bold text-lg md:col-start-3'>Transactions</h2>
       <TransactionsList transactions={data.transactions} showCurrency />
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
