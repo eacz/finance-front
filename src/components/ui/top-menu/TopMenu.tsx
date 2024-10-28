@@ -11,6 +11,7 @@ const menuItems = [
   { href: '/', name: 'Home' },
   { href: '/transactions', name: 'Transactions' },
   { href: '/accounts', name: 'Accounts' },
+  { href: '/categories', name: 'Categories' },
   { href: '/profile', name: 'Profile' },
 ]
 

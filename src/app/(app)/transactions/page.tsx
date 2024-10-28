@@ -29,7 +29,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
   })
   const { data: accounts } = await getAccountsByUser(token)
 
-  const { data: categories } = await getCategoriesByUser(token)
+  const { data: categories } = await getCategoriesByUser(token, {})
   
   if (!ok || !data) {
     notFound()

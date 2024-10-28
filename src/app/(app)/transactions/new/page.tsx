@@ -13,7 +13,7 @@ export default async function NewTransactionPage({ searchParams }: Props) {
   const token = session?.user.token ?? ''
 
   const { ok, data: accounts } = await getAccountsByUser(token)
-  const { data: categories } = await getCategoriesByUser(token)
+  const { data: categories } = await getCategoriesByUser(token, {})
 
   if (!ok || !accounts) {
     notFound()

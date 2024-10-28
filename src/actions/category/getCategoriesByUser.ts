@@ -1,11 +1,18 @@
-'use server';
+'use server'
 
 import { transactionApi } from '@/lib/axios'
-import { Category } from '@/modules/category';
+import { Category } from '@/modules/category'
 
-export const getCategoriesByUser = async (token: string) => {
+interface Payload {
+  showTransactionsNumber?: boolean
+}
+
+export const getCategoriesByUser = async (token: string, { showTransactionsNumber }: Payload) => {
   try {
-    const { data } = await transactionApi.get<Category[]>('/category/', {
+    const params = new URLSearchParams()
+    if (showTransactionsNumber) params.set('showTransactionsAmount', 'true')
+
+    const { data } = await transactionApi.get<Category[]>(`/category?${params.toString()}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     return {
