@@ -6,7 +6,7 @@ interface Props {
 }
 export const CategoryItem = ({ category }: Props) => {
   return (
-    <div className='shadow block w-full rounded-lg bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white'>
+    <div className='shadow block w-full rounded-lg bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white md:max-w-48'>
       <div className='p-6'>
         <h5 className='mb-1 text-xl font-medium leading-tight '>{category.name}</h5>
         <p className='mb-4 text-base leading-normal'>Transactions: {category.transactionsAmount}</p>

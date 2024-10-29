@@ -14,7 +14,7 @@ export default async function CategoryPage() {
   }
 
   return (
-    <div className='container-main flex  justify-center gap-2'>
+    <div className='container-main flex flex-col md:flex-row  justify-center gap-2'>
       <CreateCategory token={token} />
       <CategoriesList categories={data} />
       {data.length === 0 && (
