@@ -15,7 +15,7 @@ export default async function CategoryPage() {
 
   return (
     <div className='container-main flex  justify-center gap-2'>
-      <CreateCategory token={token} userId={session?.user.id ?? 0} />
+      <CreateCategory token={token} />
       <CategoriesList categories={data} />
       {data.length === 0 && (
         <div className='flex justify-center align-center h-80'>

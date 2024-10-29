@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Modal } from '@/components'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { createCategory } from '@/actions'
 
 interface FormInputs {
   name: string
@@ -12,11 +13,10 @@ interface FormInputs {
 }
 
 interface Props {
-  token?: string
-  userId: number
+  token: string
 }
 
-export const CreateCategory = ({ token, userId }: Props) => {
+export const CreateCategory = ({ token }: Props) => {
   const [isModalActive, setIsModalActive] = useState(false)
   const [error, setError] = useState('')
   const { register, handleSubmit, reset } = useForm<FormInputs>()
@@ -24,12 +24,11 @@ export const CreateCategory = ({ token, userId }: Props) => {
   const router = useRouter()
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
 
-    //const { ok, message } = await updateAccountFunds(token, { amount: newFunds, accountId })
-    //if (!ok) {
-    //  setError(message)
-    //}
+    const { ok, message } = await createCategory(token, data)
+    if (!ok) {
+      setError(message)
+    }
     setError('')
     setIsModalActive(false)
     reset()

@@ -17,3 +17,5 @@ export * from './transaction/revert-transaction'
 
 export * from './category/get-categories-by-user'
 export * from './category/get-category-by-id'
+export * from './category/create-category'
+
