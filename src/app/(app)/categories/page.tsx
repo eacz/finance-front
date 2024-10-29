@@ -1,10 +1,11 @@
 import { getCategoriesByUser } from '@/actions'
 import { auth } from '@/auth.config'
-import { CategoriesList } from '@/modules/category'
+import { CategoriesList, CreateCategory } from '@/modules/category'
 
 export default async function CategoryPage() {
   const session = await auth()
-  const { ok, message, data } = await getCategoriesByUser(session?.user.token || '', {
+  const token = session?.user.token ?? ''
+  const { ok, message, data } = await getCategoriesByUser(token, {
     showTransactionsNumber: true,
   })
 
@@ -13,7 +14,8 @@ export default async function CategoryPage() {
   }
 
   return (
-    <div className='container-main flex flex-col justify-center gap-2'>
+    <div className='container-main flex  justify-center gap-2'>
+      <CreateCategory token={token} userId={session?.user.id ?? 0} />
       <CategoriesList categories={data} />
       {data.length === 0 && (
         <div className='flex justify-center align-center h-80'>

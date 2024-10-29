@@ -25,7 +25,7 @@ export const Modal = ({ children, title, active, setActive }: Props) => {
                   'justify-end': !title,
                 })}
                 onClick={closeModal}>
-                <h3>{title}</h3>
+                <h3 className='font-bold text-lg'>{title}</h3>
                 <IoCloseOutline size={30} />
               </div>
               <div className='sm:flex sm:items-start'>{children}</div>
