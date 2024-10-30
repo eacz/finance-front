@@ -19,3 +19,4 @@ export * from './category/get-categories-by-user'
 export * from './category/get-category-by-id'
 export * from './category/create-category'
 
+export * from './currency/get-currencies'

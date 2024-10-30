@@ -4,7 +4,9 @@ import { redirect } from 'next/navigation'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
-  if(!session?.user){
+  console.log(session?.expires);
+  
+  if(!session?.user || new Date() > new Date(session?.expires)  ){
     redirect('/auth/login')
   }
   return (
