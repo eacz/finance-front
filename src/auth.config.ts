@@ -10,6 +10,9 @@ export const authConfig: NextAuthConfig = {
     signIn: '/auth/login',
     newUser: '/auth/signup',
   },
+  session: {
+    maxAge: 3600
+  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       console.log({ auth })
