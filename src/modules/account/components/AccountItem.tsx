@@ -8,7 +8,7 @@ interface Props {
 
 export const AccountItem = ({ account }: Props) => {
   return (
-    <div className='shadow block w-full rounded-lg bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white'>
+    <div className='shadow block w-full rounded-lg bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white md:max-w-72'>
       <div className='p-6'>
         <h5 className='mb-1 text-xl font-medium leading-tight '>{account.currency.code} Account</h5>
         <h6 className='mb-2 text-base font-medium leading-tight text-surface/75 dark:text-neutral-300'>
