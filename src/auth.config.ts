@@ -4,7 +4,6 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { z } from 'zod'
 import { AuthResponse } from './interfaces'
 import { transactionApi } from './lib/axios'
-const BACKEND_URL = process.env.BACKEND_URL
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',

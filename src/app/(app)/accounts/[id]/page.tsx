@@ -66,7 +66,13 @@ export default async function AccountByIdPage({ params, searchParams }: Props) {
         />
       </div>
       <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Account Transactions</h2>
-      <TransactionsList transactions={transactions} />
+      {transactions.length ? (
+        <TransactionsList transactions={transactions} />
+      ) : (
+        <div className='flex justify-center align-center col-start-2 col-end-4 mt-4'>
+          <p className='text-lg'>You don't have any transactions with this account</p>
+        </div>
+      )}
 
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </div>
