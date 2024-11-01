@@ -6,15 +6,21 @@ interface Payload {
   id: number
   title?: string
   description?: string
+  category?: number
 }
 
 export const modifyTransaction = async (token: string, { id, ...toUpdate }: Payload) => {
   try {
+    
     const {
       data: { ok },
-    } = await transactionApi.patch<{ ok: boolean }>(`/transaction/${id}`, toUpdate, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    } = await transactionApi.patch<{ ok: boolean }>(
+      `/transaction/${id}`,
+      { ...toUpdate },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     return { ok, message: ok ? '' : 'Error updating the transaction' }
   } catch (error: any) {
     console.log(error.response.data)

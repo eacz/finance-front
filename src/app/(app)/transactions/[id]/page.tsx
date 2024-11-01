@@ -1,4 +1,4 @@
-import { GetTransactionById } from '@/actions'
+import { getCategoriesByUser, GetTransactionById } from '@/actions'
 import { auth } from '@/auth.config'
 import { ModifyTransaction, RevertTransactionAlert } from '@/modules/transactions'
 import { currencyFormat, dayFormat } from '@/utils'
@@ -11,8 +11,10 @@ interface Props {
 
 export default async function TransactionByIdPage({ params }: Props) {
   const session = await auth()
+  const token = session?.user.token ?? ''
 
-  const { ok, data } = await GetTransactionById(session?.user.token ?? '', Number(params.id))
+  const { ok, data } = await GetTransactionById(token, Number(params.id))
+  const { data: categories } = await getCategoriesByUser(token, {})
 
   if (!ok || !data) {
     notFound()
@@ -48,7 +50,7 @@ export default async function TransactionByIdPage({ params }: Props) {
         </div>
       </div>
       <div className='flex mt-10 justify-between gap-4'>
-        <ModifyTransaction transaction={transaction} />
+        <ModifyTransaction transaction={transaction} categories={categories} />
         <RevertTransactionAlert transactionId={transaction.id} />
       </div>
     </div>

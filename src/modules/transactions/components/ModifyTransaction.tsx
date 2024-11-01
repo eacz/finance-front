@@ -5,12 +5,13 @@ import { useState } from 'react'
 
 import { Modal } from '@/components'
 import { useRouter } from 'next/navigation'
-import { Transaction } from '../interfaces/transaction'
 import { modifyTransaction } from '@/actions'
+import { Category } from '../interfaces/get-transaction-by-id.response'
 
 interface FormInputs {
   title?: string
   description?: string
+  category?: number
 }
 
 interface Props {
@@ -22,24 +23,32 @@ interface Props {
     amount: number
     createdAt: Date
     updatedAt: Date
+    category?: Category
   }
+  categories?: Category[]
 }
 
-export const ModifyTransaction = ({ transaction }: Props) => {
+export const ModifyTransaction = ({ transaction, categories = [] }: Props) => {
   const [isModalActive, setIsModalActive] = useState(false)
   const [error, setError] = useState('')
   const { data: session } = useSession()
+  const token = session?.user.token ?? ''
+
   const router = useRouter()
   const {
     register,
     handleSubmit,
     formState: { isDirty },
   } = useForm<FormInputs>({
-    defaultValues: { description: transaction.description, title: transaction.title },
+    defaultValues: {
+      description: transaction.description,
+      title: transaction.title,
+      category: transaction?.category?.id ? transaction.category.id : undefined,
+    },
   })
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const { ok, message } = await modifyTransaction(session?.user.token ?? '', {
+    const { ok, message } = await modifyTransaction(token, {
       id: transaction.id,
       ...data,
     })
@@ -63,13 +72,16 @@ export const ModifyTransaction = ({ transaction }: Props) => {
         <form className='flex flex-col mt-4 w-full gap-4' onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className='label mb-1 md:mb-0 pr-4'>Title</label>
-            <input
-              className='input'
-              id='inline-password'
-              type='text'
-              placeholder='Title'
-              {...register('title')}
-            />
+            <input className='input' type='text' placeholder='Title' {...register('title')} />
+          </div>
+          <div>
+            <label className='label mb-1 md:mb-0 pr-4'>Category</label>
+            <select className='select' {...register('category', { valueAsNumber: true })}>
+              <option value="">--- Select ---</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
+            </select>
           </div>
           <div>
             <label className='label mb-1 md:mb-0 pr-4'>Description</label>
