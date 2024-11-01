@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { UpdateAccountFunds } from '@/modules/account'
 import { TransactionsList } from '@/modules/transactions'
-import { dayFormat, currencyFormat } from '@/utils'
-import { getAccountById, getCategoryById } from '@/actions'
+import { getCategoryById } from '@/actions'
 import { auth } from '@/auth.config'
 import { Pagination } from '@/components'
 

@@ -9,7 +9,6 @@ import { createTransaction } from '@/actions'
 import { Account } from '@/modules/account'
 import { Category } from '@/modules/category'
 
-
 interface FormInputs {
   title: string
   description?: string
@@ -24,12 +23,17 @@ interface Props {
   categories: Category[]
   token: string
   fromAccount?: string
+  fromCategory?: string
 }
 
-export const NewTransactionForm = ({ accounts, token, fromAccount, categories }: Props) => {
+export const NewTransactionForm = ({ accounts, token, fromAccount, fromCategory, categories }: Props) => {
   const account = accounts.find((a) => a.id === Number(fromAccount))
+  const category = categories.find((c) => c.id === Number(fromCategory))
   const { register, handleSubmit } = useForm<FormInputs>({
-    defaultValues: { account: account ? account.id : undefined },
+    defaultValues: {
+      account: account ? account.id : undefined,
+      categoryId: category ? category.id : undefined,
+    },
   })
   const [error, setError] = useState('')
   const router = useRouter()
@@ -118,7 +122,7 @@ export const NewTransactionForm = ({ accounts, token, fromAccount, categories }:
               ))}
             </select>
           </div>
-          <div  className='flex-1' />
+          <div className='flex-1' />
         </div>
       )}
 

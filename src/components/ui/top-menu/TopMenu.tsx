@@ -25,6 +25,9 @@ export const TopMenu = () => {
     if (pathname.includes('accounts') && params?.id) {
       return router.push(`/transactions/new?fromAccount=${params.id}`)
     }
+    if (pathname.includes('categories') && params?.id) {
+      return router.push(`/transactions/new?fromCategory=${params.id}`)
+    }
     router.push(`/transactions/new`)
   }
 

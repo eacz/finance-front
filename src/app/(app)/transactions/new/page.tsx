@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 interface Props {
   searchParams: {
     fromAccount?: string
+    fromCategory?: string
   }
 }
 export default async function NewTransactionPage({ searchParams }: Props) {
@@ -27,6 +28,7 @@ export default async function NewTransactionPage({ searchParams }: Props) {
         token={session?.user.token ?? ''}
         categories={categories ?? []}
         fromAccount={searchParams.fromAccount}
+        fromCategory={searchParams.fromCategory}
       />
     </div>
   )
