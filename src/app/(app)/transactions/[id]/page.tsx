@@ -43,6 +43,14 @@ export default async function TransactionByIdPage({ params }: Props) {
               {currency.code}
             </Link>
           </p>
+          {transaction.category && (
+            <p>
+              Category:{' '}
+              <Link className='blue-link' href={`/accounts/${transaction.category.id}`}>
+                {transaction.category.name}
+              </Link>
+            </p>
+          )}
         </div>
         <div className='flex flex-col gap-2'>
           <p className='font-bold text-center text-xl'>Description</p>
