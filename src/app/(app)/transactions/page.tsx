@@ -39,7 +39,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
 
   const totalPages = Math.ceil(data.total / transactionsPerPage)
   const hasFilter = !!Object.keys(searchParams).length
-  
+
   return (
     <div className='container-main grid grid-cols-1 md:grid-cols-3 gap-4'>
       {data.transactions.length || hasFilter ? (
@@ -48,7 +48,15 @@ export default async function TransactionsPage({ searchParams }: Props) {
           <h1 className='hidden md:block font-bold text-lg md:col-start-3'>Transactions</h1>
           <TransactionFilter accounts={accounts} categories={categories ?? []} />
           <h2 className='md:hidden font-bold text-lg md:col-start-3'>Transactions</h2>
-          <TransactionsList transactions={data.transactions} showCurrency />
+          {data.transactions.length ? (
+            <TransactionsList transactions={data.transactions} showCurrency />
+          ) : (
+            <div className='flex justify-center align-center col-start-2 col-end-4 mt-4'>
+              <p className='text-lg'>
+                Oops! looks like you don't have any transaction with this filter
+              </p>
+            </div>
+          )}
           {totalPages > 1 && <Pagination totalPages={totalPages} />}
         </>
       ) : (
