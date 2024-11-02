@@ -4,6 +4,7 @@ import { TransactionsList } from '@/modules/transactions'
 import { getCategoryById } from '@/actions'
 import { auth } from '@/auth.config'
 import { Pagination } from '@/components'
+import { ModifyCategory } from '@/modules/category'
 
 interface Props {
   params: { id: string }
@@ -45,8 +46,13 @@ export default async function CategoryByIdPage({ params, searchParams }: Props) 
         <p className='mt-4 text-md font-medium dark:text-neutral-300 leading-normal'>
           {category.description}
         </p>
+        <div className='mt-4'>
+          <ModifyCategory category={category} />
+        </div>
       </div>
-      <h2 className=' mb-2 md:hidden font-bold text-lg md:col-start-3'>Category Transactions</h2>
+      <h2 className=' mb-2 md:hidden font-bold text-lg md:row-start-1 md:col-start-3'>
+        Category Transactions
+      </h2>
       {transactions.length ? (
         <TransactionsList transactions={transactions} />
       ) : (
