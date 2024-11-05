@@ -29,7 +29,7 @@ export const getCategoryIcon = (iconText: avalaibleIcons) => {
   return icon ?? textToIcon['other']
 }
 
-const textToIcon = {
+export const textToIcon = {
   other: IoGridOutline,
   food: IoFastFoodOutline,
   hammer: IoHammerOutline,
