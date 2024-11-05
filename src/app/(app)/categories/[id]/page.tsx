@@ -5,6 +5,7 @@ import { getCategoryById } from '@/actions'
 import { auth } from '@/auth.config'
 import { Pagination } from '@/components'
 import { ModifyCategory } from '@/modules/category'
+import { getCategoryIcon } from '@/utils'
 
 interface Props {
   params: { id: string }
@@ -29,6 +30,8 @@ export default async function CategoryByIdPage({ params, searchParams }: Props) 
     notFound()
   }
 
+  const Icon = getCategoryIcon(category.icon)
+
   const totalPages = Math.ceil(totalTransactions / transactionsPerPage)
 
   return (
@@ -38,8 +41,10 @@ export default async function CategoryByIdPage({ params, searchParams }: Props) 
         {category.name} transactions
       </h2>
       <div className='shadow block w-full rounded-lg bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white p-4'>
-        <div className='flex'></div>
-        <h6 className='mt-2 text-xl font-bold dark:text-neutral-300 leading-normal'>{category.name}</h6>
+        <div className='flex items-center gap-2'>
+          <Icon size={20} />
+          <h6 className='text-xl font-bold dark:text-neutral-300 leading-normal'>{category.name}</h6>
+        </div>
         <h6 className='mt-2 text-md font-medium dark:text-neutral-300 leading-normal'>
           Total transactions with this category: {totalTransactions}
         </h6>

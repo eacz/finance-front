@@ -17,7 +17,6 @@ export const getCategoryById = async (token: string, { categoryId, limit, offset
 
     const transactionPromise = getTransactionsByUser(token, { limit, offset, category: categoryId })
     const [{ data: category }, { data }] = await Promise.all([categoryPromise, transactionPromise])
-
     if (!category || !data) {
       return { ok: false }
     }
