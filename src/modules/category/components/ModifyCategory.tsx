@@ -6,16 +6,20 @@ import { useState } from 'react'
 import { Modal } from '@/components'
 import { useRouter } from 'next/navigation'
 import { modifyCategory } from '@/actions'
+import { IconSelector } from './IconSelector'
+import { avalaibleIcons } from '@/utils'
 
 interface FormInputs {
   name: string
   description?: string
+  icon: avalaibleIcons
 }
 
 interface Props {
   category: {
     id: number
     name: string
+    icon: avalaibleIcons
     description?: string
   }
 }
@@ -31,6 +35,8 @@ export const ModifyCategory = ({ category }: Props) => {
     register,
     handleSubmit,
     formState: { isDirty },
+
+    setValue,
   } = useForm<FormInputs>({
     defaultValues: {
       description: category.description ?? undefined,
@@ -63,6 +69,17 @@ export const ModifyCategory = ({ category }: Props) => {
           <div>
             <label className='label mb-1 md:mb-0 pr-4'>Title</label>
             <input className='input' type='text' placeholder='Name' {...register('name')} />
+          </div>
+          <div className='mb-6 '>
+            <label className='label md:mb-0 pr-4'>Icon</label>
+            <div className='my-2' style={{ width: 'calc(100% - 3rem)' }}>
+              <IconSelector
+                setter={(value: avalaibleIcons) =>
+                  setValue('icon', value, { shouldDirty: true, shouldTouch: true })
+                }
+                initialIcon={category.icon}
+              />
+            </div>
           </div>
           <div>
             <label className='label mb-1 md:mb-0 pr-4'>Description</label>
