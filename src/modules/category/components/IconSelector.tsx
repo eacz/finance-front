@@ -1,43 +1,46 @@
 'use client'
 
 import React, { useState } from 'react'
+import clsx from 'clsx'
 import { IconType } from 'react-icons/lib'
 
 import { avalaibleIcons, textToIcon } from '@/utils'
 
 interface Props {
   initialIcon?: avalaibleIcons
+  setter: (value: avalaibleIcons) => void
 }
-
-export const IconSelector = ({ initialIcon = 'other' }: Props) => {
+//TODO: add animation on display icons
+export const IconSelector = ({ initialIcon = 'other', setter }: Props) => {
   const [DisplayedIcon, setDisplayedIcon] = useState<IconType>(() => textToIcon[initialIcon])
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const onSelect = (icon: avalaibleIcons) => {
     setDisplayedIcon(() => textToIcon[icon])
+    setter(icon)
     setIsOpen(false)
   }
 
   return (
-    <div className=''>
-      <button type='button' onClick={() => setIsOpen(true)}>
+    <div className='absolute' style={{ width: 'inherit' }}>
+      <button type='button' onClick={() => setIsOpen(!isOpen)}>
         <DisplayedIcon size={25} />
       </button>
-      {/*{!isOpen && (
-      )}*/}
 
-      {isOpen && (
-        <div className='bg-slate-100 p-2 rounded text-4xl grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-1'>
-          {Object.keys(textToIcon).map((icon, index) => {
-            const Icon = textToIcon[icon as avalaibleIcons]
-            return (
-              <div onClick={() => onSelect(icon as avalaibleIcons)}>
-                <Icon key={icon} size={20} />
-              </div>
-            )
-          })}
-        </div>
-      )}
+      <div
+        className={clsx(
+          `bg-slate-100 p-2 relative rounded grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-1 transition-all duration-300`,
+          { block: isOpen, hidden: !isOpen }
+        )}>
+        {Object.keys(textToIcon).map((icon) => {
+          const Icon = textToIcon[icon as avalaibleIcons]
+          return (
+            <div className='' key={icon} onClick={() => onSelect(icon as avalaibleIcons)}>
+              <Icon size={20} />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

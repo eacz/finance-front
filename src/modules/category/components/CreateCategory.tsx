@@ -7,9 +7,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Modal } from '@/components'
 import { createCategory } from '@/actions'
 import { IconSelector } from '../'
+import { avalaibleIcons } from '@/utils'
 
 interface FormInputs {
   name: string
+  icon: avalaibleIcons
   description?: string
 }
 
@@ -20,7 +22,9 @@ interface Props {
 export const CreateCategory = ({ token }: Props) => {
   const [isModalActive, setIsModalActive] = useState(false)
   const [error, setError] = useState('')
-  const { register, handleSubmit, reset } = useForm<FormInputs>()
+  const { register, handleSubmit, reset, setValue } = useForm<FormInputs>({
+    defaultValues: { icon: 'other' },
+  })
 
   const router = useRouter()
 
@@ -65,13 +69,13 @@ export const CreateCategory = ({ token }: Props) => {
             </div>
           </div>
 
-          <div className='md:flex md:items-center mb-6'>
+          <div className='md:flex md:items-center md:mb-6 mb-10 '>
             <div className='md:w-1/3'>
               <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'>Icon</label>
             </div>
 
-            <div className='md:w-2/3'>
-              <IconSelector />
+            <div className='md:w-2/3 mb-6'>
+              <IconSelector setter={(value: avalaibleIcons) => setValue('icon', value)} />
             </div>
           </div>
           <div className='md:flex md:items-center mb-6'>
