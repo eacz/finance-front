@@ -45,19 +45,10 @@ export const TransactionFilter = ({ accounts, categories }: Props) => {
 
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
-      <div className='flex flex-row gap-2 w-full h-10'>
-        <div className='flex rounded-md overflow-hidden w-full'>
-          <input
-            type='text'
-            className='w-full rounded-md rounded-r-none border-small'
-            {...register('textFilter')}
-          />
-          <button className='bg-secondary text-white px-4 font-semibold py-2 rounded-r-md '>Go</button>
-        </div>
-        <button className='btn-info' type='button' onClick={() => onClear()}>
-          Clear
-        </button>
+      <div className=''>
+        <input type='text' placeholder='Search something...' className='input' {...register('textFilter')} />
       </div>
+
       <div className='flex flex-col md:flex-row gap-4 justify-center items-center'>
         {accounts && (
           <div className='flex flex-col w-full'>
@@ -85,6 +76,14 @@ export const TransactionFilter = ({ accounts, categories }: Props) => {
             </select>
           </div>
         )}
+      </div>
+      <div className='flex justify-between mt-10'>
+        <button className='btn-info' type='button' onClick={() => onClear()}>
+          Clear Filter
+        </button>
+        <button className='btn-primary' type='submit'>
+          Search
+        </button>
       </div>
     </form>
   )

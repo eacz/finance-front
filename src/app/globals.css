@@ -206,6 +206,5 @@ a {
 }
 
 .pagination-button-active {
-  @apply bg-blue-600 shadow-md text-white hover:text-white hover:bg-blue-700
-
+  @apply bg-blue-600 shadow-md text-white hover:text-white hover:bg-blue-700;
 }
