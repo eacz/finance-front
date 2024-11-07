@@ -54,49 +54,31 @@ export const CreateCategory = ({ token }: Props) => {
         active={isModalActive}
         setActive={(value: boolean) => setIsModalActive(value)}
         title={`Create new category`}>
-        <form className='w-full mt-5' onSubmit={handleSubmit(onSubmit)}>
-          <div className='md:flex md:items-center mb-6'>
-            <div className='md:w-1/3'>
-              <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'>Name</label>
-            </div>
-            <div className='md:w-2/3'>
-              <input
-                className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
-                type='text'
-                placeholder='...'
-                {...register('name', { required: true })}
-              />
-            </div>
+        <form className='flex flex-col mt-4 w-full gap-4' onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label className='label mb-1 md:mb-0 pr-4'>Name</label>
+            <input
+              className='input'
+              type='text'
+              placeholder='...'
+              {...register('name', { required: true })}
+            />
           </div>
-
-          <div className='md:flex md:items-center md:mb-6 mb-10 '>
-            <div className='md:w-1/3'>
-              <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'>Icon</label>
-            </div>
-
-            <div className='md:w-2/3 mb-6'>
+          <div className='mb-6'>
+            <label className='label mb-1 md:mb-0 pr-4'>Icon</label>
+            <div className='my-2' style={{ width: 'calc(100% - 3rem)' }}>
               <IconSelector setter={(value: avalaibleIcons) => setValue('icon', value)} />
             </div>
           </div>
-          <div className='md:flex md:items-center mb-6'>
-            <div className='md:w-1/3'>
-              <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'>
-                Description
-              </label>
-            </div>
 
-            <div className='md:w-2/3'>
-              <textarea
-                className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
-                placeholder='..........'
-                {...register('description')}
-              />
-            </div>
+          <div>
+            <label className='label mb-1 md:mb-0 pr-4'>Description</label>
+            <textarea className='textarea' placeholder='..........' {...register('description')} />
           </div>
 
           {error && <p className='text-danger text-center'>{error}</p>}
 
-          <div className='flex justify-end gap-2'>
+          <div className='flex justify-between mt-10'>
             <button onClick={() => setIsModalActive(false)} className='btn-info'>
               Cancel
             </button>

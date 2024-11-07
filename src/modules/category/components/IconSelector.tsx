@@ -10,7 +10,7 @@ interface Props {
   initialIcon?: avalaibleIcons
   setter: (value: avalaibleIcons) => void
 }
-//TODO: add animation on display icons
+
 export const IconSelector = ({ initialIcon = 'other', setter }: Props) => {
   const [DisplayedIcon, setDisplayedIcon] = useState<IconType>(() => textToIcon[initialIcon])
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -29,14 +29,17 @@ export const IconSelector = ({ initialIcon = 'other', setter }: Props) => {
 
       <div
         className={clsx(
-          `bg-slate-100 p-2 relative rounded grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-1 transition-all duration-300`,
-          { block: isOpen, hidden: !isOpen }
+          `bg-slate-100 relative rounded grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10  transition-all duration-300 delay-100 overflow-hidden`,
+          { 'h-32': isOpen, 'h-0': !isOpen }
         )}>
         {Object.keys(textToIcon).map((icon) => {
           const Icon = textToIcon[icon as avalaibleIcons]
           return (
-            <div className='' key={icon} onClick={() => onSelect(icon as avalaibleIcons)}>
-              <Icon size={20} />
+            <div
+              className='flex items-center justify-center '
+              key={icon}
+              onClick={() => onSelect(icon as avalaibleIcons)}>
+              <Icon size={20} className='cursor-pointer' />
             </div>
           )
         })}
