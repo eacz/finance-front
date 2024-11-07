@@ -46,7 +46,7 @@ export default async function TransactionByIdPage({ params }: Props) {
           {transaction.category && (
             <p>
               Category:{' '}
-              <Link className='blue-link' href={`/accounts/${transaction.category.id}`}>
+              <Link className='blue-link' href={`/categories/${transaction.category.id}`}>
                 {transaction.category.name}
               </Link>
             </p>
