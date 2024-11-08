@@ -4,6 +4,7 @@ export interface Transaction {
   title: string
   description: null | string
   amount: number
+  isEditable: boolean;
   createdAt: Date
   updatedAt: Date
   currency: Currency

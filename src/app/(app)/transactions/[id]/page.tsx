@@ -57,10 +57,12 @@ export default async function TransactionByIdPage({ params }: Props) {
           <p>{transaction.description}</p>
         </div>
       </div>
-      <div className='flex mt-10 justify-between gap-4'>
-        <ModifyTransaction transaction={transaction} categories={categories} />
-        <RevertTransactionAlert transactionId={transaction.id} />
-      </div>
+      {transaction.isEditable && (
+        <div className='flex mt-10 justify-between gap-4'>
+          <ModifyTransaction transaction={transaction} categories={categories} />
+          <RevertTransactionAlert transactionId={transaction.id} />
+        </div>
+      )}
     </div>
   )
 }

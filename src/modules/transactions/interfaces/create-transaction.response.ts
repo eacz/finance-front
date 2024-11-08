@@ -5,7 +5,8 @@ export interface CreateTransactionResponse {
   account:     number;
   currency:    number;
   user:        User;
-  description: null;
+  description: string;
+  isEditable:  boolean;
   id:          number;
   createdAt:   Date;
   updatedAt:   Date;

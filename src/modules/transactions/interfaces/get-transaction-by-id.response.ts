@@ -4,6 +4,7 @@ export interface GetTransactionByIdResponse {
   title: string
   description: string
   amount: number
+  isEditable: boolean;
   createdAt: Date
   updatedAt: Date
   account: Account
