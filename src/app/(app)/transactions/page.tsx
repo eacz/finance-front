@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getAccountsByUser, getCategoriesByUser, getTransactionsByUser } from '@/actions'
 import { auth } from '@/auth.config'
 import { Pagination } from '@/components'
-import { TransactionFilter, TransactionsList } from '@/modules/transactions'
+import { ExpensesChart, TransactionFilter, TransactionsList } from '@/modules/transactions'
 
 interface Props {
   searchParams: {
@@ -46,15 +46,16 @@ export default async function TransactionsPage({ searchParams }: Props) {
         <>
           <h2 className='font-bold text-lg'>Filter</h2>
           <h1 className='hidden md:block font-bold text-lg md:col-start-3'>Transactions</h1>
-          <TransactionFilter accounts={accounts} categories={categories ?? []} />
+          <div className='flex flex-col'>
+            <TransactionFilter accounts={accounts} categories={categories ?? []} />
+            <ExpensesChart />
+          </div>
           <h2 className='md:hidden font-bold text-lg md:col-start-3'>Transactions</h2>
           {data.transactions.length ? (
             <TransactionsList transactions={data.transactions} showCurrency />
           ) : (
             <div className='flex justify-center align-center col-start-2 col-end-4 mt-4'>
-              <p className='text-lg'>
-                Oops! looks like you don't have any transaction with this filter
-              </p>
+              <p className='text-lg'>Oops! looks like you don't have any transaction with this filter</p>
             </div>
           )}
           {totalPages > 1 && <Pagination totalPages={totalPages} />}
